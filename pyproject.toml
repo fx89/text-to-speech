@@ -8,6 +8,7 @@ version = "1.0.0"
 dependencies = [
     "ptts",
     "pydub>=0.25.1",
+    "audioop-lts", # required for pydub
     "pyyaml>=6.0.4"
 ]
 

@@ -1,0 +1,4 @@
+{{NARRATOR}} This is something the narrator would say.
+
+This is a new paragraph. It is spoken by the narrator since no new actor
+label has been encountered.

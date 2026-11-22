@@ -1,21 +1,27 @@
 # Maps models to short IDs for easier reference in the voices section
 models:
-  - id: phonon-31m-en # User-defined ID
-    path: /home/desolatetimelines/downloads/phonon # Path to where the model is installed
+  - model_id: phonon-31m-en # User-defined ID
+    model_path: /path/to/phonon/model # Path to the model (either relative (to the project directory) or absolute local directory or hugging faces URL [hf://owner/name@revision])
 
 # Defines the voice actors to be used in the script and maps them to model voices
 # To define this, one must be aware of the list of available voices for each model
 # This can be done by calling text-to-speech.py with the "--list-voices" flag
 # More information in the readme
-voices:
-  - id: NARRATOR # This can be used in text files under the "input-text" directory to identify the voice to speak a given paragraph
-    model_id: phonon-31m-en # Reference to the models section
+actors:
+  - actor_id: NARRATOR # This can be used in text files under the "input-text" directory to identify the voice to speak a given paragraph
+#   model_id: phonon-31m-en # Reference to the models section
+    model_id: default
     voice_name: The Thing Under the Stairs # Name of the voice - to list voices, run text-to-speech.py [-m <model-path>] --list-voices
 
-  - id: KILLIAN
+  - actor_id: KILLIAN
     model_id: default # "default" is a keyword that makes the script use the model that comes with PTTS (at the time this was written, the default model is the Apache2.0-licensed phonon 31m)
     voice_name: Hugh
 
-  - id: FIRESTAR
+  - actor_id: FIRESTAR
     model_id: default
-    voice_name: Nerea
+    voice_name: Annika
+
+  # The voice name may be replaced by the path to a custom voice
+  - actor_id: MR_DEFAULT
+    model_id: default
+    voice_path: voices/optional-phonon-31m-default-voice.safetensors # The path can be either absolute or relative to the project directory

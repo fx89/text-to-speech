@@ -1,0 +1,20 @@
+{{FIRESTAR}}
+This is something Firestar would say, since she's the one labeled above.
+
+{{KILLIAN}} This line is spoken by Killian, since his label is just before.
+
+              {{NARRATOR}}
+
+It doesn't matter where the label is placed. As long as the label is there,
+the switch is done.
+
+The file is red line by line. {{FIRESTAR}} All lines are combined into one large
+string to be spoken. This large string is split by the presence of labels. {{NARRATOR}} Please refrain from using double curly brackets within spoken text.
+This will cause validation errors when running the utility script.
+
+Testing {{FIRESTAR}} testing {{KILLIAN}} testing {{NARRATOR}} testing {{KILLIAN}}
+
+{{KILLIAN}}
+
+{{MR_DEFAULT}} Testing the default voice {{KILLIAN}}
+{{KILLIAN}}

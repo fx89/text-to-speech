@@ -224,3 +224,6 @@ __marimo__/
 
 # IntelliJ
 .idea/
+
+# Project-specific exclusions
+example-project/output-audio/
