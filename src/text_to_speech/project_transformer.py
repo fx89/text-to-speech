@@ -114,6 +114,9 @@ def transform_file(
     # Directories
     output_directory = root_path.replace(input_text_path, output_audio_path)
 
+    # Make sure the output directory exists
+    os.makedirs(output_directory, exist_ok=True)
+
     # File names
     file_base_name = os.path.splitext(filename)[0]
     input_file_base_path = os.path.join(root_path, file_base_name)
