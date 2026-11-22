@@ -5,6 +5,8 @@ generated sounds together using PyDub.
 
 Useful for making audiobooks.
 
+See the [GitHub page](https://github.com/fx89/text-to-speech).
+
 ## References:
 
 ### PTTS
@@ -48,7 +50,7 @@ source /path/to/new/virtual/environment/bin/activate
 To download and install the package, run
 
 ```
-python -m pip install text-to-speech
+python -m pip install dtl-text-to-speech
 ```
 
 ### Optional Phonon TTS models
@@ -97,22 +99,3 @@ text-to-speech transform <path-to-project-dir>
 Take a look at the `example-project` directory in this repository to understand what a project directory is supposed to
 contain
 
-## Building
-
-If not already installed, install the build frontend
-
-```
-pip install build
-```
-
-To work locally, install the package in editable mode
-
-```
-python -m pip install -e .
-```
-
-To build the package, use the following command (generates sdist and wheel in the dist directory)
-
-```
-python -m build
-```
