@@ -28,7 +28,7 @@
 # ===============================================================================
 
 import sys
-from text_to_speech.project_transformer import transform_project
+from text_to_speech.project_transformer import new_project, transform_project
 from text_to_speech.ptts_metadata import list_voices, list_catalog_voices
 
 
@@ -48,11 +48,22 @@ def main():
 
         # Process the list-voices command
         elif sys.argv[1] == "list-voices":
-            # Model path parameter is mandatory
+            # Model path parameter is not mandatory
             if len(sys.argv) < 3:
                 list_voices("default")
             else:
                 list_voices(sys.argv[2])
+
+        # Process the new-project command
+        elif sys.argv[1] == "new-project":
+            # Project path parameter is mandatory
+            if len(sys.argv) < 3:
+                sys.stderr.write("Syntax error: <path-to-project-dir> not provided\r\n")
+                sys.stderr.write("\r\n")
+                print_usage()
+                sys.exit(1)
+            else:
+                new_project(sys.argv[2])
 
         # Process the transform command
         elif sys.argv[1] == "transform":
@@ -86,10 +97,12 @@ def print_usage():
     sys.stderr.write("   <command> [parameters] can be either: \r\n")
     sys.stderr.write("      list-catgalog-voices\r\n")
     sys.stderr.write("      list-voices [path-to-model-dir|default]\r\n")
+    sys.stderr.write("      new-project <path-to-project-dir>\r\n")
     sys.stderr.write("      transform <path-to-project-dir>\r\n")
     sys.stderr.write("Examples: \r\n")
     sys.stderr.write("   " + sys.argv[0] + "list-catalog-voices\r\n")
     sys.stderr.write("   " + sys.argv[0] + "list-voices /path/to/model\r\n")
+    sys.stderr.write("   " + sys.argv[0] + "new-project /path/to/project/dir\r\n")
     sys.stderr.write("   " + sys.argv[0] + "transform /path/to/project/dir\r\n")
 
 

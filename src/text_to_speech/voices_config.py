@@ -29,6 +29,35 @@ from text_to_speech.exceptions import ConfigurationError
 
 # ===============================================================================
 
+def get_example_voice_file_lines():
+    return [
+        "# Maps models to short IDs for easier reference in the voices section\r\n",
+        "models:\r\n",
+        "  - model_id: phonon-31m-en # User-defined ID\r\n",
+        "    model_path: /path/to/phonon/model # Path to the model (either relative (to the project directory) or absolute local directory or hugging faces URL [hf://owner/name@revision])\r\n"
+        "\r\n",
+        "# Defines the voice actors to be used in the script and maps them to model voices\r\n",
+        "# To define this, one must be aware of the list of available voices for each model\r\n",
+        "# This can be done by calling text-to-speech.py with the \"--list-voices\" flag\r\n",
+        "# More information in the readme\r\n",
+        "actors:\r\n",
+        "  - actor_id: NARRATOR # This can be used in text files under the \"input-text\" directory to identify the voice to speak a given paragraph\r\n",
+        "#   model_id: phonon-31m-en # Reference to the models section\r\n",
+        "    model_id: default\r\n",
+        "    voice_name: Hugh # Name of the voice - to list voices, run text-to-speech.py [-m <model-path>] --list-voices\r\n",
+        "\r\n",
+        "  - actor_id: MAIN_CHARACTER\r\n",
+        "    model_id: default\r\n",
+        "    voice_name: Annika\r\n",
+        "\r\n",
+        "    # The voice name may be replaced by the path to a custom voice\r\n"
+        "  - actor_id: MR_DEFAULT\r\n",
+        "    model_id: default\r\n",
+        "    voice_path: voices/optional-phonon-31m-default-voice.safetensors # The path can be either absolute or relative to the project directory\r\n"
+    ]
+
+# ===============================================================================
+
 class VoiceConfig:
     """
     Entity that defines the model to be loaded and the name to reference in order to

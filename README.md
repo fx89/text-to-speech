@@ -90,6 +90,11 @@ text-to-speech list-voices [optional-model-path]
 
 ### Running the tts transformation on a project directory
 
+Use the following command to create a new project in a given target path
+```
+text-to-speech new-project <path-to-project-dir>
+```
+
 Use the following command to run on a project directory
 
 ```

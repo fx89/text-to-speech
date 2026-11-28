@@ -26,16 +26,71 @@ import os
 import sys
 from text_to_speech.exceptions import ProjectDirectoryValidationError
 from text_to_speech.transformer import transform
-from text_to_speech.voices_config import VoicesConfig
+from text_to_speech.voices_config import VoicesConfig, get_example_voice_file_lines
+
+
+# ===============================================================================
+
+class ProjectDir:
+    def __init__(self, project_path):
+        self.voices_path = os.path.join(project_path, "voices.yaml")
+        self.input_text_path = os.path.join(project_path, "input-text")
+        self.output_audio_path = os.path.join(project_path, "output-audio")
+        self.voices_directory_path = os.path.join(project_path, "voices")
+
+# ===============================================================================
+
+def new_project(project_path):
+    # Make sure the project path doesn't already exist
+    if os.path.isdir(project_path) or os.path.isfile(project_path):
+        raise ProjectDirectoryValidationError(
+            "The path [" + project_path + "] cannot be created " +
+            "because it already exists."
+        )
+
+    # Create the project directory
+    os.makedirs(project_path, exist_ok=False)
+
+    # Compose the project paths
+    project_dir = ProjectDir(project_path)
+
+    # Create the input-text directory
+    os.makedirs(project_dir.input_text_path, exist_ok=False)
+
+    # Create the voices directory
+    os.makedirs(project_dir.voices_directory_path, exist_ok=False)
+
+    # Create the output-audio directory
+    os.makedirs(project_dir.output_audio_path, exist_ok=False)
+
+    # Create the voices.yaml config file
+    with open(project_dir.voices_path, "w") as f:
+        f.writelines(get_example_voice_file_lines())
+
+    # Create the sample input file
+    sample_input_file_path = os.path.join(project_dir.input_text_path, "0000-0000-example.txt")
+    with open(sample_input_file_path, "w") as f:
+        f.writelines([
+            "{{NARRATOR}} This is a sample line\r\n",
+            "\r\n",
+            "{{MAIN_CHARACTER}}\r\n",
+            "This is another sample line\r\n",
+            "\r\n",
+            "{{NARRATOR}} For a comprehensive example, visit the example project at {{MAIN_CHARACTER}} https://github.com/fx89/text-to-speech/tree/main/example-project\r\n"
+        ])
+
+    # Report success
+    sys.stdout.write("New project created in [" + project_path + "]\r\n")
 
 
 # ===============================================================================
 
 def transform_project(project_path):
     # Compose paths
-    voices_path = os.path.join(project_path, "voices.yaml")
-    input_text_path = os.path.join(project_path, "input-text")
-    output_audio_path = os.path.join(project_path, "output-audio")
+    project_dir = ProjectDir(project_path)
+    voices_path = project_dir.voices_path
+    input_text_path = project_dir.input_text_path
+    output_audio_path = project_dir.output_audio_path
 
     # Validate the project directory
     validate_project_directory(project_path, voices_path, input_text_path)
