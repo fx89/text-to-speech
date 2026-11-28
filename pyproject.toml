@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dtl-text-to-speech"
-version = "1.0.3"
+version = "1.0.4"
 description="PTTS wrapper script that transforms dialogues from text to speech using multiple voices and models, and stitches the generated sounds together using PyDub. Useful for making audiobooks."
 readme = "README.md"
 dependencies = [

@@ -24,6 +24,7 @@
 
 import os
 import sys
+import shutil
 from text_to_speech.exceptions import ProjectDirectoryValidationError
 from text_to_speech.transformer import transform
 from text_to_speech.voices_config import VoicesConfig, get_example_voice_file_lines
@@ -136,8 +137,12 @@ def transform_project_directory(
         output_audio_path,
         voices
 ):
-    # Create the output directory in case it does not exist
-    os.makedirs(output_audio_path, exist_ok=True)
+    # Delete the output directory in case it already exists (to clean it up)
+    if os.path.exists(output_audio_path):
+        shutil.rmtree(output_audio_path)
+
+    # Create the output directory
+    os.makedirs(output_audio_path, exist_ok=False)
 
     # Walk the input text path recursively
     for root, dirs, files in os.walk(input_text_path):
